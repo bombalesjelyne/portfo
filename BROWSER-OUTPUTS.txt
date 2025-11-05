@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICT&AP E-Portfolio</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(to bottom, #6dc7e8, #43bae6);
+            margin: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 43%;
+            opacity: 0.4;
+            transform: translateY(0);
+            z-index: 0;
+            pointer-events: none;
+            animation: fadeSlide 1.5s ease forwards;
+        }
+
+        @keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 0.4;
+                transform: translateY(0);
+            }
+        }
+
+        .head {
+            position: relative;
+            text-align: center;
+            height: 120px;
+            margin-top: 20px;
+            z-index: 1;
+        }
+        .head-bg {
+            background: #2E7D32;
+            width: 500px;
+            height: 110px;
+            border-radius: 15px;
+            position: absolute;
+            top: 0;
+            left: 1%;
+            z-index: 0;
+        }
+        .head-text-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 2;
+        }
+        .head-jel, .head-fam {
+            background: linear-gradient(to right, #FFFACD, #B2F802);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 35px;
+            font-weight: bold;
+            display: block;
+            position: absolute;
+            left: 0;
+            right: auto;
+            margin: 0 auto;
+        }
+        .head-jel {
+            top: 10px;
+            right: 490px;
+        }
+        .head-fam {
+            top: 60px;
+            right: 715px;
+        }
+
+        .active-page {
+            font-family: Impact, Charcoal, sans-serif;
+            font-weight: bold;
+            font-size: 35px;
+            letter-spacing: 1px;
+            color: #2E7D32;
+            margin-top: 130px;
+        }
+
+        .text-box {
+            position: relative;
+            margin: 60px auto 50px auto;
+            width: 80%;
+            max-width: 1000px;
+            padding: 40px;
+            background-color: #fefefe;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+            font-size: 18px;
+            line-height: 1.7;
+            color: #004d00;
+            text-align: justify;
+            z-index: 1;
+        }
+        .text-box p {
+            font-family: "Delius", cursive;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .image-grid img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .image-grid img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        @media (max-width: 700px) {
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+            .image-grid img {
+                height: 250px;
+            }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s ease;
+            z-index: 10;
+        }
+        .menu-checkbox:checked ~ .overlay {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .menu-checkbox {
+            display: none;
+        }
+        .menu-icon {
+            font-size: 35px;
+            cursor: pointer;
+            user-select: none;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            position: fixed;
+            top: 20px;
+            right: 50px;
+            z-index: 22;
+            transition: all 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+        .menu-checkbox:checked + .menu-icon {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .dropdown-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background: white;
+            box-shadow: -4px 0 10px rgba(0,0,0,0.3);
+            z-index: 21;
+            padding-top: 100px;
+            transition: right 0.6s ease;
+        }
+        .menu-checkbox:checked + .menu-icon + .dropdown-menu {
+            right: 0;
+        }
+        .menu-checkbox:checked + .menu-icon + .dropdown-menu a {
+            opacity: 1;
+            transform: translate(0,0);
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            font-weight: 900;
+            color: gray;
+            cursor: pointer;
+            text-decoration: none;
+            opacity: 0;
+            transform: translate(20px, -20px);
+            transition: all 0.6s ease;
+        }
+        .menu-menu {
+            position: absolute;
+            top: 21px;
+            left: 110px;
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 29px;
+            color: #004d00;
+            opacity: 0;
+            transform: translate(-20px, -20px);
+            transition: all 0.6s ease;
+            pointer-events: none;
+            z-index: 16;
+        }
+        .menu-checkbox:checked + .menu-icon + .dropdown-menu .menu-menu,
+        .menu-checkbox:checked + .menu-icon + .dropdown-menu .close-menu {
+            opacity: 1;
+            transform: translate(0,0);
+        }
+        .dropdown-menu a {
+            display: block;
+            text-align: center;
+            padding: 20px 0;
+            color: #004d00;
+            text-decoration: none;
+            font-family: Impact, Charcoal, sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 25px;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #ccc;
+            opacity: 0;
+            transform: translate(20px, -10px);
+            transition: all 0.6s ease;
+        }
+        .dropdown-menu a.active {
+            background: #2E7D32;
+            color: white;
+        }
+
+        .dropdown-menu a:hover {
+            background: #f0f0f0;
+            color: #FF8C00;
+        }
+        .mike4 {
+            position: fixed;
+            top: 87%;
+            left: 130%;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: 130px;
+            opacity: 0;
+            transition: all 0.6s ease;
+            z-index: 50;
+            pointer-events: none;
+        }
+
+        .menu-checkbox:checked + .menu-icon + .dropdown-menu + .mike4 {
+            left: 82.67%;
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+
+        .submenu-checkbox {
+            display: none;
+        }
+        .submenu-label {
+            display: block;
+            text-align: center;
+            padding: 20px 0;
+            color: #004d00;
+            font-family: Impact, Charcoal, sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 25px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #ccc;
+            position: relative;
+        }
+        .submenu-label::after {
+            content: '\25BC';
+            position: absolute;
+            right: 20px;
+            transition: transform 0.3s ease;
+        }
+        .submenu-checkbox:checked + .submenu-label::after {
+            transform: rotate(180deg);
+        }
+
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.5s ease, opacity 0.5s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .submenu-checkbox:checked + .submenu-label + .submenu {
+            max-height: 200px;
+            opacity: 1;
+        }
+        .submenu a {
+            text-align: left;
+            padding: 15px 20px;
+            font-size: 20px;
+            color: #004d00;
+            background: #f9f9f9;
+            border-bottom: 1px solid #ccc;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        .submenu a:hover {
+            background: #f0f0f0;
+            color: #FF8C00;
+        }
+        .submenu a::before {
+            content: '\25B6';
+            margin-right: 8px;
+        }
+
+        .cat {
+            width: 100px;
+            border-radius: 15px;
+            position: absolute;
+            top: 4px;
+            right: 1000px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+        .wow {
+            width: 190px;
+            border-radius: 15px;
+            position: absolute;
+            top: 90px;
+            right: -10px;
+            z-index: 1;
+        }
+        .ribbon {
+            width: 170px;
+            border-radius: 15px;
+            position: absolute;
+            top: 1290px;
+            right: 930px;
+            transform: rotate(-11deg);
+            z-index: 1;
+        }
+        .frog {
+            width: 140px;
+            border-radius: 15px;
+            position: absolute;
+            top: 5550px;
+            right: 770px;
+            transform: rotate(17deg);
+            z-index: 1;
+        }
+
+        .cats {
+            width: 170px;
+            border-radius: 15px;
+            position: absolute;
+            top: 4390px;
+            right: 550px;
+            z-index: 1;
+        }
+        .sims {
+            width: 70px;
+            border-radius: 15px;
+            position: absolute;
+            top: 293px;
+            right: 520px;
+            z-index: 1;
+        }
+        .greensticker {
+            width: 195px;
+            border-radius: 15px;
+            position: absolute;
+            top: 4283px;
+            right: 16px;
+            transform: rotate(11deg);
+            z-index: 1;
+        }
+
+        .speaker {
+            width: 210px;
+            border-radius: 15px;
+            position: absolute;
+            top: 840px;
+            right: 25px;
+            z-index: 1;
+        }
+        .cat-tech {
+            width: 170px;
+            border-radius: 15px;
+            position: absolute;
+            top: 920px;
+            right: 710px;
+            transform: rotate(-12deg);
+            z-index: 1;
+        }
+        .nerd {
+            width: 160px;
+            border-radius: 15px;
+            position: absolute;
+            top: 6003px;
+            right: 250px;
+            transform: rotate(-7deg);
+            z-index: 1;
+        }
+
+
+        .folder {
+            width: 170px;
+            border-radius: 15px;
+            position: absolute;
+            top: 283px;
+            right: 310px;
+            z-index: 1;
+        }
+        .monkey {
+            width: 170px;
+            border-radius: 15px;
+            position: absolute;
+            top: 10123px;
+            right: 620px;
+            z-index: 1;
+        }
+        footer {
+            text-align: center;
+            color: #004d00;
+            margin-top: 50px;
+            font-size: 15px;
+            opacity: 0.5;
+            font-family: Impact, Charcoal, sans-serif;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .menu-icon, .close-menu, .dropdown-menu a, .submenu-label, .submenu a {
+            outline: none;
+            box-shadow: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <img src="images/mitsuaya.png" alt="mitsuki bg" class="background-image">
+
+    <div class="head">
+        <div class="head-bg"></div>
+        <div class="head-text-container">
+            <span class="head-jel">Jelyne Irish B. Tabuzo</span>
+            <span class="head-fam">9-Family</span>
+            <h1 class="active-page">E-PORTFOLIO</h1>
+        </div>
+    </div>
+
+    <input type="checkbox" id="menu-toggle" class="menu-checkbox">
+    <label for="menu-toggle" class="menu-icon">&#9776;</label>
+
+    <div class="dropdown-menu">
+        <span class="menu-menu">MENU</span>
+        <label for="menu-toggle" class="close-menu">X</label>
+
+        <a href="index.html">PERSONAL</a>
+
+        <input type="checkbox" id="ict-toggle" class="submenu-checkbox">
+        <label for="ict-toggle" class="submenu-label">ICT/TLE</label>
+        <div class="submenu">
+            <a href="BROWSER-OUTPUTS.html" class="active">BROWSER OUTPUTS</a>
+            <a href="SCHOOL-EVENTS.html">SCHOOL EVENTS</a>
+        </div>
+
+        <a href="AP.html">AP</a>
+    </div>
+    <img src="images/mike4.png" alt="mike" class="mike4">
+
+    <div class="overlay"></div>
+
+    <div class="text-box">
+        <p>
+            Welcome to my E-Portfolio! Here you can explore my personal projects, ICT/TLE works, and AP activities.
+            Feel free to navigate through the menu (◍•ᴗ•◍). This is the ICT/TLE Area with all of my Browser Outputs :3!
+        </p>
+
+        <h2 style="font-family: Impact, Charcoal, sans-serif; text-align: center; color: #2E7D32; margin-top: 40px;">LESSON 1</h2>
+        <p style="flex: 1; margin-left: 20px;">
+            Cascading Style Sheets (CSS) is a language used to design and control the appearance of webpages. It works alongside HTML, which provides the structure of a webpage, while CSS adds style, color, layout, and visual formatting. With CSS, developers can change how text looks, adjust spacing, apply backgrounds, and design layouts without altering the HTML structure. It allows for consistency across multiple pages, separating design from content and making websites easier to maintain and update.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 20px; align-items: flex-start; margin-top: 20px;">
+
+            <div style="display: flex; gap: 20px;">
+                <img src="images/CSS.jpg" alt="ehem ehem" style="width: 57%; height: 218px; object-fit: contain; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); object-position: top;">
+                <img src="images/CSS2.jpg" alt="mikerlz" style="width: 44%; height: 218px; object-fit: contain; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); object-position: top;">
+            </div>
+        </div>
+    </div>
+
+    <div class="text-box">
+        <h2 style="text-align: center; color: #2E7D32; margin-bottom: 20px;">LESSON 2</h2>
+        <p>
+            Stylesheets are where CSS rules are written and stored. They tell the browser how to display HTML elements. CSS can be applied in three main ways: inline, internal, and external. Inline styles are written directly inside an HTML tag using the style attribute. Internal styles are placed within a &lt;style&gt; tag inside the &lt;head&gt; section of an HTML document, and external styles are written in a separate .css file and linked to the HTML file using the &lt;link&gt; tag. External stylesheets are the most efficient and professional way to manage large websites because they separate style from structure and make it easy to update the design of multiple pages at once.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
+        </div>
+    </div>
+
+    <div class="text-box">
+        <h2 style="text-align: center; color: #2E7D32; margin-bottom: 20px;">LESSON 3</h2>
+        <p>
+            In CSS, the display property controls how an element is positioned and behaves in a layout. Block-level elements (like &lt;div&gt;, &lt;p&gt;, and &lt;h1&gt;) begin on a new line and stretch across the entire available width, making them useful for dividing and structuring sections of a page. Inline elements (such as &lt;span&gt;, &lt;a&gt;, and &lt;strong&gt;) stay on the same line and only occupy as much space as their content requires. Knowing the difference between these display types is key to creating well-structured and properly aligned webpages. CSS also lets developers modify an element’s display mode, offering greater flexibility and control over layout design.
+        </p>
+        <p>
+            CODE 1 (◍•ᴗ•◍)
+        </p>
+        <div class="image-grid">
+            <img src="images/CSS.jpg" alt="ehem ehem" style="object-fit:contain;">
+            <img src="images/CSS2.jpg" alt="mikerlz" style="object-fit:contain;">
+        </div>
+        <p>
+            CODE 2 (◍•ᴗ•◍)
+        </p>
+        <div class="image-grid">
+            <img src="images/CSSL3.jpg" alt="mikerlz" style="object-fit:contain;">
+            <img src="images/CSSL32.jpg" alt="mikerlz" style="object-fit:contain;">
+        </div>
+        <p>
+            CODE 3 (◍•ᴗ•◍)
+        </p>
+        <div class="image-grid">
+            <img src="images/CSSL33.jpg" alt="mikerlz" style="object-fit:contain;">
+            <img src="images/CSSL34.jpg" alt="mikerlz" style="object-fit:contain;">
+        </div>
+        <p>
+            CODE 4 (◍•ᴗ•◍)
+        </p>
+        <div class="image-grid">
+            <img src="images/CSSL35.jpg" alt="mikerlz" style="object-fit:contain;">
+            <img src="images/CSSL352.jpg" alt="mikerlz" style="object-fit:contain;">
+            <img src="images/CSSL353.jpg" alt="mikerlz" style="object-fit:contain;">
+        </div>
+        <p>
+            CODE 5 (◍•ᴗ•◍)
+        </p>
+        <div class="image-grid">
+            <img src="images/CSSL36.jpg" alt="mikerlz" style="object-fit:contain;">
+            <img src="images/CSSL37.jpg" alt="mikerlz" style="object-fit:contain;">
+        </div>
+        <p>
+            CODE 6 (◍•ᴗ•◍)
+        </p>
+        <div class="image-grid">
+            <img src="images/CSSL38.jpg" alt="mikerlz" style="object-fit:contain;">
+            <img src="images/CSSL39.jpg" alt="mikerlz" style="object-fit:contain;">
+        </div>
+    </div>
+
+    <div class="text-box">
+        <h2 style="text-align: center; color: #2E7D32; margin-bottom: 20px;">LESSON 4</h2>
+        <p>
+            CODE 1 (◍•ᴗ•◍)
+        </p>
+        <div class="image-grid">
+            <img src="images/CSSL41.jpg" alt="ehem ehem" style="object-fit:contain;">
+            <img src="images/CSSL42.jpg" alt="mikerlz" style="object-fit:contain;">
+        </div>
+        <p>
+            CODE 2 (◍•ᴗ•◍)
+        </p>
+        <div class="image-grid">
+            <img src="images/CSSL43.jpg" alt="mikerlz" style="object-fit:contain;">
+            <img src="images/CSSL44.jpg" alt="mikerlz" style="object-fit:contain;">
+        </div>
+        <p>
+            CODE 3 (◍•ᴗ•◍)
+        </p>
+        <div class="image-grid">
+            <img src="images/CSSL45.jpg" alt="mikerlz" style="object-fit:contain;">
+            <img src="images/CSSL46.jpg" alt="mikerlz" style="object-fit:contain;">
+        </div>
+        <p>
+            CODE 4 (◍•ᴗ•◍)
+        </p>
+        <div class="image-grid">
+            <img src="images/CSSL47.jpg" alt="mikerlz" style="object-fit:contain;">
+            <img src="images/CSSL48.jpg" alt="mikerlz" style="object-fit:contain;">
+            <img src="images/CSSL49.jpg" alt="mikerlz" style="object-fit:contain;">
+        </div>
+    </div>
+
+    <div class="text-box">
+        <h2 style="text-align: center; color: #2E7D32; margin-bottom: 20px;">LESSON 5</h2>
+        <p>
+            CODE 1 (◍•ᴗ•◍)
+        </p>
+        <div class="image-grid">
+            <img src="images/CSSL51.jpg" alt="mikerlz" style="object-fit:contain;">
+            <img src="images/CSSL52.jpg" alt="mikerlz" style="object-fit:contain;">
+            <img src="images/CSSL53.jpg" alt="mikerlz" style="object-fit:contain;">
+        </div>
+        <p>
+            CODE 2 (◍•ᴗ•◍)
+        </p>
+        <div class="image-grid">
+            <img src="images/CSSL54.jpg" alt="mikerlz" style="object-fit:contain;">
+            <img src="images/CSSL55.jpg" alt="mikerlz" style="object-fit:contain;">
+            <img src="images/CSSL56.jpg" alt="mikerlz" style="object-fit:contain;">
+        </div>
+        <p>
+            CODE 3 (◍•ᴗ•◍)
+        </p>
+        <div class="image-grid">
+            <img src="images/CSSL57.jpg" alt="mikerlz" style="object-fit:contain;">
+            <img src="images/CSSL58.jpg" alt="mikerlz" style="object-fit:contain;">
+            <img src="images/CSSL59.jpg" alt="mikerlz" style="object-fit:contain;">
+        </div>
+        <p>
+            CODE 4 (◍•ᴗ•◍)
+        </p>
+        <div class="image-grid">
+            <img src="images/CSSL510.jpg" alt="mikerlz" style="object-fit:contain;">
+            <img src="images/CSSL511.jpg" alt="mikerlz" style="object-fit:contain;">
+            <img src="images/CSSL512.jpg" alt="mikerlz" style="object-fit:contain;">
+        </div>
+        <p>
+            CODE 5 (◍•ᴗ•◍)
+        </p>
+        <div class="image-grid">
+            <img src="images/CSSL513.jpg" alt="mikerlz" style="object-fit:contain;">
+            <img src="images/CSSL514.jpg" alt="mikerlz" style="object-fit:contain;">
+            <img src="images/CSSL515.jpg" alt="mikerlz" style="object-fit:contain;">
+        </div>
+    </div>
+    <div class="text-box">
+        <h2 style="text-align: center; color: #2E7D32; margin-bottom: 20px;">LESSON 6</h2>
+        <p>
+            CODE 1 (◍•ᴗ•◍)
+        </p>
+        <div class="image-grid">
+            <img src="images/CSSL61.jpg" alt="mikerlz" style="object-fit:contain;">
+            <img src="images/CSSL62.jpg" alt="mikerlz" style="object-fit:contain;">
+        </div>        <p>
+            CODE 2 (◍•ᴗ•◍)
+        </p>
+        <div class="image-grid">
+            <img src="images/CSSL63.jpg" alt="mikerlz" style="object-fit:contain;">
+            <img src="images/CSSL64.jpg" alt="mikerlz" style="object-fit:contain;">
+        </div>
+
+    </div>
+    <footer>
+        <p>
+            MADE WITH LOVE | SCORE : PATAY WHAHAHAHA
+        </p>
+    </footer>
+
+    <img src="images/cat.jpeg" alt="cat" class="cat">
+    <img src="images/wow.png" alt="wow" class="wow">
+    <img src="images/ribbon.png" alt="ribbon" class="ribbon">
+    <img src="images/frog.png" alt="frog" class="frog">
+    <img src="images/cats.png" alt="cats" class="cats">
+    <img src="images/sims.png" alt="sims" class="sims">
+    <img src="images/cat-tech.png" alt="cat-tech" class="cat-tech">
+    <img src="images/speaker.png" alt="speaker" class="speaker">
+    <img src="images/greensticker.png" alt="greensticker" class="greensticker">
+    <img src="images/nerd.png" alt="nerd" class="nerd">
+    <img src="images/monkey.png" alt="monkey" class="monkey">
+    <img src="images/folder.png" alt="folder" class="folder">
+
+
+
+</body>
+</html>

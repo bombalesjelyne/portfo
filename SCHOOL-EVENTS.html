@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICT&AP E-Portfolio</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(to bottom, #fffa63, #dbd640);
+            margin: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 20%;
+            opacity: 0.4;
+            transform: translateY(0);
+            z-index: 0;
+            pointer-events: none;
+            animation: fadeSlide 1.5s ease forwards;
+        }
+        @keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 0.4;
+                transform: translateY(0);
+            }
+        }
+
+        .head {
+            position: relative;
+            text-align: center;
+            height: 120px;
+            margin-top: 20px;
+            z-index: 1;
+        }
+        .head-bg {
+            background: #2E7D32;
+            width: 500px;
+            height: 110px;
+            border-radius: 15px;
+            position: absolute;
+            top: 0;
+            left: 1%;
+            z-index: 0;
+        }
+        .head-text-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 2;
+        }
+        .head-jel, .head-fam {
+            background: linear-gradient(to right, #FFFACD, #B2F802);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 35px;
+            font-weight: bold;
+            display: block;
+            position: absolute;
+            left: 0;
+            right: auto;
+            margin: 0 auto;
+        }
+        .head-jel {
+            top: 10px;
+            right: 490px;
+        }
+        .head-fam {
+            top: 60px;
+            right: 715px;
+        }
+
+        .text-box {
+            position: relative;
+            margin: 60px auto 50px auto;
+            width: 80%;
+            max-width: 1000px;
+            padding: 40px;
+            background-color: #fefefe;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+            font-size: 18px;
+            line-height: 1.7;
+            color: #004d00;
+            text-align: justify;
+            z-index: 1;
+        }
+        .text-box p {
+            font-family: "Delius", cursive;
+            font-weight: 400;
+            font-style: normal;
+        }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .image-grid img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .image-grid img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+        @media (max-width: 700px) {
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+            .image-grid img {
+                height: 250px;
+            }
+        }
+
+        .active-page {
+            font-family: Impact, Charcoal, sans-serif;
+            font-weight: bold;
+            font-size: 35px;
+            letter-spacing: 1px;
+            color: #2E7D32;
+            margin-top: 130px;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s ease;
+            z-index: 10;
+        }
+        .menu-checkbox:checked ~ .overlay {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .menu-checkbox {
+            display: none;
+        }
+        .menu-icon {
+            font-size: 35px;
+            cursor: pointer;
+            user-select: none;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            position: fixed;
+            top: 20px;
+            right: 50px;
+            z-index: 22;
+            transition: all 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+        .menu-checkbox:checked + .menu-icon {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .dropdown-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background: white;
+            box-shadow: -4px 0 10px rgba(0,0,0,0.3);
+            z-index: 21;
+            padding-top: 100px;
+            transition: right 0.6s ease;
+        }
+        .menu-checkbox:checked + .menu-icon + .dropdown-menu {
+            right: 0;
+        }
+        .menu-checkbox:checked + .menu-icon + .dropdown-menu a {
+            opacity: 1;
+            transform: translate(0,0);
+        }
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            font-weight: 900;
+            color: gray;
+            cursor: pointer;
+            text-decoration: none;
+            opacity: 0;
+            transform: translate(20px, -20px);
+            transition: all 0.6s ease;
+        }
+        .menu-menu {
+            position: absolute;
+            top: 21px;
+            left: 110px;
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 29px;
+            color: #004d00;
+            opacity: 0;
+            transform: translate(-20px, -20px);
+            transition: all 0.6s ease;
+            pointer-events: none;
+            z-index: 16;
+        }
+        .menu-checkbox:checked + .menu-icon + .dropdown-menu .menu-menu,
+        .menu-checkbox:checked + .menu-icon + .dropdown-menu .close-menu {
+            opacity: 1;
+            transform: translate(0,0);
+        }
+        .dropdown-menu a {
+            display: block;
+            text-align: center;
+            padding: 20px 0;
+            color: #004d00;
+            text-decoration: none;
+            font-family: Impact, Charcoal, sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 25px;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #ccc;
+            opacity: 0;
+            transform: translate(20px, -10px);
+            transition: all 0.6s ease;
+        }
+        .dropdown-menu a.active {
+            background: #2E7D32;
+            color: white;
+        }
+        .dropdown-menu a:hover {
+            background: #f0f0f0;
+            color: #FF8C00;
+        }
+
+        .mike2 {
+            position: fixed;
+            top: 89%;
+            left: 130%;
+            width: 110px;
+            transform: rotate(87deg);
+            transition: all 0.6s ease;
+            z-index: 50;
+            pointer-events: none;
+        }
+        .menu-checkbox:checked + .menu-icon + .dropdown-menu + .mike2 {
+            left: 86%;
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.05) rotate(87deg);
+        }
+
+        .submenu-checkbox {
+            display: none;
+        }
+        .submenu-label {
+            display: block;
+            text-align: center;
+            padding: 20px 0;
+            color: #004d00;
+            font-family: Impact, Charcoal, sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 25px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #ccc;
+            position: relative;
+        }
+        .submenu-label::after {
+            content: '\25BC';
+            position: absolute;
+            right: 20px;
+            transition: transform 0.3s ease;
+        }
+        .submenu-checkbox:checked + .submenu-label::after {
+            transform: rotate(180deg);
+        }
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.5s ease, opacity 0.5s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .submenu-checkbox:checked + .submenu-label + .submenu {
+            max-height: 200px;
+            opacity: 1;
+        }
+        .submenu a {
+            text-align: left;
+            padding: 15px 20px;
+            font-size: 20px;
+            color: #004d00;
+            background: #f9f9f9;
+            border-bottom: 1px solid #ccc;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        .submenu a:hover {
+            background: #f0f0f0;
+            color: #FF8C00;
+        }
+        .submenu a::before {
+            content: '\25B6';
+            margin-right: 8px;
+        }
+
+        .cat {
+            width: 100px;
+            border-radius: 15px;
+            position: absolute;
+            top: 4px;
+            right: 1000px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+        .wow {
+            width: 190px;
+            border-radius: 15px;
+            position: absolute;
+            top: 90px;
+            right: -10px;
+            z-index: 1;
+        }
+        .ribbon {
+            width: 200px;
+            border-radius: 15px;
+            position: absolute;
+            top: 1420px;
+            right: 890px;
+            transform: rotate(-8deg);
+            z-index: 1;
+        }
+        .frog {
+            width: 180px;
+            border-radius: 15px;
+            position: absolute;
+            top: 1450px;
+            right: 80px;
+            transform: rotate(17deg);
+            z-index: 1;
+        }
+        .cats {
+            width: 170px;
+            border-radius: 15px;
+            position: absolute;
+            top: 3715px;
+            right: 600px;
+            z-index: 1;
+        }
+        .till {
+            width: 160px;
+            border-radius: 15px;
+            position: absolute;
+            top: 2580px;
+            right: 20px;
+            transform: rotate(8deg);
+            z-index: 1;
+        }
+        .sims {
+            width: 70px;
+            border-radius: 15px;
+            position: absolute;
+            top: 293px;
+            right: 520px;
+            z-index: 1;
+        }
+        .greenstars {
+            width: 110px;
+            border-radius: 15px;
+            position: absolute;
+            top: 4858px;
+            right: 90px;
+            z-index: 1;
+        }
+        .frog-chibi {
+            width: 180px;
+            border-radius: 15px;
+            position: absolute;
+            top: 3010px;
+            right: 883px;
+            transform: rotate(-7deg);
+            z-index: 1;
+        }
+        .cat2 {
+            width: 130px;
+            border-radius: 15px;
+            position: absolute;
+            top: 5990px;
+            right: 900px;
+            z-index: 1;
+        }
+        .cat-pixel {
+            width: 230px;
+            border-radius: 15px;
+            position: absolute;
+            top: 330px;
+            right: 295px;
+            z-index: 1;
+        }
+        .speaker {
+            width: 210px;
+            border-radius: 15px;
+            position: absolute;
+            top: 5930px;
+            right: 25px;
+            z-index: 1;
+        }
+        .music-cat {
+            width: 80px;
+            border-radius: 15px;
+            position: absolute;
+            top: 400px;
+            right: 650px;
+            z-index: 1;
+        }
+        .polaroid {
+            width: 310px;
+            border-radius: 15px;
+            position: absolute;
+            top: 1090px;
+            right: 50px;
+            transform: rotate(9deg);
+            z-index: 1;
+        }
+        .greensticker {
+            width: 270px;
+            border-radius: 15px;
+            position: absolute;
+            top: 1125px;
+            right: 780px;
+            z-index: 1;
+        }
+        .sitting {
+            width: 120px;
+            border-radius: 15px;
+            position: absolute;
+            top: 3760px;
+            right: 380px;
+            z-index: 1;
+        }
+
+
+        footer {
+            text-align: center;
+            color: #004d00;
+            margin-top: 50px;
+            font-size: 15px;
+            opacity: 0.5;
+            font-family: Impact, Charcoal, sans-serif;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .menu-icon, .close-menu, .dropdown-menu a, .submenu-label, .submenu a {
+            outline: none;
+            box-shadow: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <img src="images/mitsuaya0.png" alt="aya bg" class="background-image">
+
+    <div class="head">
+        <div class="head-bg"></div>
+        <div class="head-text-container">
+            <span class="head-jel">Jelyne Irish B. Tabuzo</span>
+            <span class="head-fam">9-Family</span>
+            <h1 class="active-page">E-PORTFOLIO</h1>
+        </div>
+    </div>
+
+    <input type="checkbox" id="menu-toggle" class="menu-checkbox">
+    <label for="menu-toggle" class="menu-icon">&#9776;</label>
+
+    <div class="dropdown-menu">
+        <span class="menu-menu">MENU</span>
+        <label for="menu-toggle" class="close-menu">X</label>
+
+        <a href="index.html">PERSONAL</a>
+
+        <input type="checkbox" id="ict-toggle" class="submenu-checkbox">
+        <label for="ict-toggle" class="submenu-label">ICT/TLE</label>
+        <div class="submenu">
+            <a href="BROWSER-OUTPUTS.html">BROWSER OUTPUTS</a>
+            <a href="SCHOOL-EVENTS.html"class="active">SCHOOL EVENTS</a>
+        </div>
+
+        <a href="AP.html">AP</a>
+    </div>
+    <img src="images/mike2.png" alt="mike" class="mike2">
+    <div class="overlay"></div>
+
+    <div class="text-box">
+        <p>
+            Welcome to my E-Portfolio! Here you can explore my personal projects, ICT/TLE works, and AP activities.
+            Feel free to navigate through the menu (◍•ᴗ•◍). This is also the ICT/TLE Area but with a collection of all the school events this quarter :3!
+        </p>
+        <p>
+            Credits to Bela Paguigan, 9-Faith(AP Month); Jade Imperial, 9-Family(Intramurals Pictures); Juan Amelia Dandan 9-Family(Cluster Meet Video)
+        </p>
+        <h2 style="text-align: center; color: #2E7D32; margin-bottom: 20px;">Buwan ng Wika</h2>
+        <p>
+            During our Buwan ng Wika celebration, I gained a deeper appreciation for our language and culture. Watching the performances and activities, and wearing the outfit reminded me how diverse Filipinos can be. This encouraged me to use our own language more proudly in everyday life. Even though I only watched, I actively participated by showing support and cheering for the performers. I can share what I learned by reminding others to value and preserve our heritage. Events like this are important because they strengthen our love for the nation and unity. They help people understand and celebrate what makes being Filipino special.
+        </p>
+
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; margin-top: 20px;">
+            <video style="width: 80%; height: 390px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);" controls>
+                <source src="videos/bnw.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div style="display: flex; gap: 20px;">
+                <img src="images/bnw.jpeg" alt="ehem ehem" style="width: 49%; height: 270px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); object-position: top;">
+                <img src="images/bnw2.jpeg" alt="mikerlz" style="width: 49%; height: 270px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); object-position: top;">
+            </div>
+        </div>
+    </div>
+
+    <div class="text-box">
+        <h2 style="text-align: center; color: #2E7D32; margin-bottom: 20px;">Intramurals</h2>
+        <p>
+            Intramurals taught me that teamwork, discipline, and respect are just as important as winning. Observing the different teams made me realize how much effort and dedication goes into every game. I can apply these lessons by cooperating with others in group projects and by keeping a positive attitude even when things don’t go my way. I loved watching and cheering for my team and classmates after class. I want to inspire others by promoting sportsmanship and encouraging people to stay positive. Holding sports events like this helps build camaraderie and school pride among students. It also provides a healthy break from academics and teaches values that go beyond the classroom.
+        </p>
+
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; margin-top: 20px;">
+            <video style="width: 80%; height: 360px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);" controls>
+                <source src="videos/intrams.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div style="display: flex; gap: 20px;">
+                <img src="images/intrams.jpg" alt="ehem ehem" style="width: 49%; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); object-position: top;">
+                <img src="images/intrams2.jpg" alt="mikerlz" style="width: 49%; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); object-position: top;">
+            </div>
+        </div>
+    </div>
+
+    <div class="text-box">
+        <h2 style="text-align: center; color: #2E7D32; margin-bottom: 20px;">Science Month</h2>
+        <p>
+            Science Month helped me realize how important hygiene, cleanliness, and awareness is in maintaining good health and hygiene. Creating our WINS corner and posters made me see how health applies to everyday life. I can use what I learned by practicing proper hygiene and encouraging others to do the same. I participated by helping decorate our WINS corner that promotes health and cleanliness. Teaching others about hygiene can be done through small reminders and by setting a good example. Celebrations like this encourage us to be creative and to be mindful. This also promotes responsibility for our environment and overall well-being.
+        </p>
+
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; margin-top: 20px;">
+            <video style="width: 80%; height: 360px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);" controls>
+                <source src="videos/sci-month.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div style="display: flex; gap: 20px;">
+                <img src="images/sci-month.jpeg" alt="ehem ehem" style="width: 49%; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); object-position: top;">
+                <img src="images/sci-month2.jpeg" alt="mikerlz" style="width: 49%; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); object-position: top;">
+            </div>
+        </div>
+    </div>
+
+    <div class="text-box">
+        <h2 style="text-align: center; color: #2E7D32; margin-bottom: 20px;">AP Month</h2>
+        <p>
+            AP Month was both educational and inspiring, especially with our seminar about the West Philippine Sea. Creating my editorial cartoon helped me express my opinions creatively and understand world issues more deeply. I learned about how important it is to be aware of national and social issues that affect our country. I can apply this by being informed and responsible citizen. I participated by attending the seminar and sharing my ideas through my cartoon. I can teach others by discussing what I learned and encouraging them to care about current events. Events like AP Month help build national unity among students.
+        </p>
+
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; margin-top: 20px;">
+            <video style="width: 80%; height: 360px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);" controls>
+                <source src="videos/ap-month.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div style="display: flex; gap: 20px;">
+                <img src="images/ap-month.jpeg" alt="ehem ehem" style="width: 49%; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); object-position: top;">
+                <img src="images/ap-month2.jpeg" alt="mikerlz" style="width: 49%; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); object-position: top;">
+            </div>
+        </div>
+    </div>
+
+    <div class="text-box">
+        <h2 style="text-align: center; color: #2E7D32; margin-bottom: 20px;">Teacher's Day</h2>
+        <p>
+            Our class celebration for Teachers’ Day reminded me how much teachers do to teach and support us every day. Seeing their smiles during the event made me realize the importance of showing gratitude for all the work our teachers do. I can apply this by respecting my teachers and giving my best effort in their classes. I participated by joining in the preparations and helping make the celebration meaningful. I can teach others to value teachers by encouraging them to express their thanks in simple, heartfelt ways, like bowing whenever seeing them. Holding events like this strengthens the bond between students and teachers and highlights the vital role of teachers in shaping our future.
+        </p>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; margin-top: 20px;">
+            <video style="width: 80%; height: 360px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);" controls>
+                <source src="videos/tc-day.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div style="display: flex; gap: 20px;">
+                <img src="images/tc-day.jpeg" alt="ehem ehem" style="width: 49%; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); object-position: top;">
+                <img src="images/tc-day2.jpeg" alt="mikerlz" style="width: 49%; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); object-position: top;">
+            </div>
+        </div>
+    </div>
+
+    <div class="text-box">
+        <h2 style="text-align: center; color: #2E7D32; margin-bottom: 20px;">Cluster Meet</h2>
+        <p>
+            Watching the Cluster Meet showed me how dedication and practice can lead to excellence. Seeing students from different schools compete motivated me to aim higher and to develop and learn brand new skills. I can do this by putting in more effort in my studies and extracurricular activities in school. Although I didn’t compete, I supported my school and learned from their performances. I can share these insights by motivating my classmates to join future contests and to do their best. Events like this build confidence and showcase the talents of our students to different schools.
+        </p>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; margin-top: 20px;">
+            <video style="width: 80%; height: 360px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);" controls>
+                <source src="videos/cluster.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div style="display: flex; gap: 20px;">
+                <img src="images/cluster.jpg" alt="ehem ehem" style="width: 49%; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); object-position: top;">
+                <img src="images/cluster2.jpg" alt="mikerlz" style="width: 49%; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); object-position: top;">
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>
+            MADE WITH LOVE | SCORE : PATAY WHAHAHAHA
+        </p>
+    </footer>
+
+    <img src="images/cat.jpeg" alt="cat" class="cat">
+    <img src="images/wow.png" alt="wow" class="wow">
+    <img src="images/ribbon.png" alt="ribbon" class="ribbon">
+    <img src="images/frog.png" alt="frog" class="frog">
+    <img src="images/cats.png" alt="cats" class="cats">
+    <img src="images/till.png" alt="till" class="till">
+    <img src="images/sims.png" alt="sims" class="sims">
+    <img src="images/greenstars.png" alt="greenstars" class="greenstars">
+    <img src="images/sitting.png" alt="sitting" class="sitting">
+    <img src="images/polaroid.png" alt="polaroid" class="polaroid">
+    <img src="images/greensticker.png" alt="greensticker" class="greensticker">
+    <img src="images/music-cat.png" alt="music-cat" class="music-cat">
+    <img src="images/speaker.png" alt="speaker" class="speaker">
+    <img src="images/cat-pixel.png" alt="cat-pixel" class="cat-pixel">
+    <img src="images/2cat.png" alt="2cat" class="cat2">
+    <img src="images/frog-chibi.png" alt="frog-chibi" class="frog-chibi">
+
+
+
+
+</body>
+</html>

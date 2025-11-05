@@ -602,7 +602,7 @@
     </style>
 </head>
 <body>
-    <img src="images/mitsuki.png" alt="mitsuki bg" class="background-image">
+    <img src="mitsuki.png" alt="mitsuki bg" class="background-image">
 
     <div class="head">
         <div class="head-bg"></div>
@@ -631,7 +631,7 @@
 
         <a href="AP.html"class="active">AP</a>
     </div>
-<img src="images/mike3.png" alt="mike" class="mike3">
+<img src="mike3.png" alt="mike" class="mike3">
 
 <div class="overlay"></div>
 
@@ -671,8 +671,8 @@ p - Price<br><br><strong>Demand Curve
         </p>
 
         <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
-            <img src="images/Demand1.jpg" alt="fam" style="width: 48%; height: 260px; object-fit: contain; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
-            <img src="images/Demand2.jpg" alt="fam2" style="width: 48%; height: 260px; object-fit: contain; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+            <img src="Demand1.jpg" alt="fam" style="width: 48%; height: 260px; object-fit: contain; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+            <img src="Demand2.jpg" alt="fam2" style="width: 48%; height: 260px; object-fit: contain; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
         </div>
     </div>
 
@@ -694,7 +694,7 @@ p - Price<br><br><strong>Supply Curve
         </p>
 
         <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
-            <img src="images/supply1.webp" alt="supply1" style="height: 260px; object-fit: contain; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+            <img src="supply1.webp" alt="supply1" style="height: 260px; object-fit: contain; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
         </div>
     </div>
 
@@ -724,8 +724,8 @@ Ep = %△Q / %△P<br>
 
         <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; margin-top: 20px;">
             <div style="display: flex; gap: 20px;">
-                <img src="images/elas1.jpg" alt="elas1" style="width: 46%; height: 270px; object-fit: contain; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); object-position: top;">
-                <img src="images/elas2.jpg" alt="elas2" style="width: 46%; height: 270px; object-fit: contain; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); object-position: top;">
+                <img src="elas1.jpg" alt="elas1" style="width: 46%; height: 270px; object-fit: contain; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); object-position: top;">
+                <img src="elas2.jpg" alt="elas2" style="width: 46%; height: 270px; object-fit: contain; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); object-position: top;">
             </div>
         </div>
     </div>
@@ -754,8 +754,8 @@ Ep = %△Q / %△P<br>
         </p>
 
         <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
-            <img src="images/equi1.jpg" alt="equi1" style="width: 48%; height: 400px; object-fit: contain; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
-            <img src="images/equi2.png" alt="equi2" style="width: 48%; height: 400px; object-fit: contain; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+            <img src="equi1.jpg" alt="equi1" style="width: 48%; height: 400px; object-fit: contain; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+            <img src="equi2.png" alt="equi2" style="width: 48%; height: 400px; object-fit: contain; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
         </div>
     </div>
 
@@ -813,8 +813,8 @@ Ep = %△Q / %△P<br>
         </p>
 
         <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
-            <img src="images/pamilihan1.jpg" alt="pamilihan1" style="width: 48%; height: 240px; object-fit: contain; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
-            <img src="images/pamilihan2.webp" alt="pamilihan2" style="width: 48%; height: 240px; object-fit: contain; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+            <img src="pamilihan1.jpg" alt="pamilihan1" style="width: 48%; height: 240px; object-fit: contain; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+            <img src="pamilihan2.webp" alt="pamilihan2" style="width: 48%; height: 240px; object-fit: contain; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
         </div>
     </div>
     <div class="text-box">
@@ -830,8 +830,8 @@ Ep = %△Q / %△P<br>
 </p>
 
         <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
-            <img src="images/pamahalaan1.webp" alt="pamahalaan1" style="width: 40%; height: 250px; object-fit: contain; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
-            <img src="images/pamahalaan2.png" alt="pamahalaan2" style="width: 40%; height:250px; object-fit: contain; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+            <img src="pamahalaan1.webp" alt="pamahalaan1" style="width: 40%; height: 250px; object-fit: contain; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+            <img src="pamahalaan2.png" alt="pamahalaan2" style="width: 40%; height:250px; object-fit: contain; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
         </div>
     </div>
     <footer>
@@ -840,35 +840,35 @@ Ep = %△Q / %△P<br>
         </p>
     </footer>
 
-    <img src="images/cat.jpeg" alt="cat" class="cat">
-    <img src="images/wow.png" alt="wow" class="wow">
-    <img src="images/ribbon.png" alt="ribbon" class="ribbon">
-    <img src="images/frog.png" alt="frog" class="frog">
-        <img src="images/cats.png" alt="cats" class="cats">
-        <img src="images/sims.png" alt="sims" class="sims">
-        <img src="images/whar.png" alt="whar" class="whar">
-        <img src="images/mike.png" alt="mike" class="mike">
-        <img src="images/star.png" alt="stars" class="stars">
-        <img src="images/money-man.png" alt="money-man" class="money-man">
-        <img src="images/money-cat.png" alt="money-cat" class="money-cat">
-        <img src="images/piggy.png" alt="piggy" class="piggy">
-        <img src="images/orange-cat.png" alt="orange-cat" class="orange-cat">
-        <img src="images/nerd-cat.png" alt="nerd-cat" class="nerd-cat">
-        <img src="images/idk.png" alt="idk" class="idk">
-        <img src="images/cat-chibi.png" alt="cat-chibi" class="cat-chibi">
-        <img src="images/man-down.png" alt="man-down" class="man-down">
-        <img src="images/speaker.png" alt="speaker" class="speaker">
-        <img src="images/cat-wiz.png" alt="cat-wiz" class="cat-wiz">
-        <img src="images/monkey.png" alt="monkey" class="monkey">
-        <img src="images/nerd.png" alt="nerd" class="nerd">
-        <img src="images/spiral.png" alt="spiral" class="spiral">
-        <img src="images/px-heart.png" alt="px-heart" class="px-heart">
-        <img src="images/tack.png" alt="tack" class="tack">
-        <img src="images/tc-frog.png" alt="tc-frog" class="tc-frog">
-        <img src="images/mushroom.png" alt="mushroom" class="mushroom">
-                <img src="images/spiral.png" alt="spiral" class="spiral2">
-                                <img src="images/spiral.png" alt="spiral" class="spiral3">
-                <img src="images/spiral.png" alt="spiral" class="spiral4">
+    <img src="cat.jpeg" alt="cat" class="cat">
+    <img src="wow.png" alt="wow" class="wow">
+    <img src="ribbon.png" alt="ribbon" class="ribbon">
+    <img src="frog.png" alt="frog" class="frog">
+        <img src="cats.png" alt="cats" class="cats">
+        <img src="sims.png" alt="sims" class="sims">
+        <img src="whar.png" alt="whar" class="whar">
+        <img src="mike.png" alt="mike" class="mike">
+        <img src="star.png" alt="stars" class="stars">
+        <img src="money-man.png" alt="money-man" class="money-man">
+        <img src="money-cat.png" alt="money-cat" class="money-cat">
+        <img src="piggy.png" alt="piggy" class="piggy">
+        <img src="orange-cat.png" alt="orange-cat" class="orange-cat">
+        <img src="nerd-cat.png" alt="nerd-cat" class="nerd-cat">
+        <img src="idk.png" alt="idk" class="idk">
+        <img src="cat-chibi.png" alt="cat-chibi" class="cat-chibi">
+        <img src="man-down.png" alt="man-down" class="man-down">
+        <img src="speaker.png" alt="speaker" class="speaker">
+        <img src="cat-wiz.png" alt="cat-wiz" class="cat-wiz">
+        <img src="monkey.png" alt="monkey" class="monkey">
+        <img src="nerd.png" alt="nerd" class="nerd">
+        <img src="spiral.png" alt="spiral" class="spiral">
+        <img src="px-heart.png" alt="px-heart" class="px-heart">
+        <img src="tack.png" alt="tack" class="tack">
+        <img src="tc-frog.png" alt="tc-frog" class="tc-frog">
+        <img src="mushroom.png" alt="mushroom" class="mushroom">
+                <img src="spiral.png" alt="spiral" class="spiral2">
+                                <img src="spiral.png" alt="spiral" class="spiral3">
+                <img src="spiral.png" alt="spiral" class="spiral4">
 
 
 

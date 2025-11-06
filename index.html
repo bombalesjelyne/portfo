@@ -15,20 +15,19 @@
             position: relative;
         }
 
-        .background-image {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center 20%;
-            opacity: 0.4;
-            transform: translateY(0);
-            z-index: 0;
-            pointer-events: none;
-            animation: fadeSlide 1.5s ease forwards;
-        }
+.background-image {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center 20%;
+    opacity: 0.4;
+    transform: translateY(0);
+    z-index: 0;
+    pointer-events: none;
+    animation: fadeSlide 1.5s ease forwards;
+}
 
         @keyframes fadeSlide {
             0% {
@@ -50,8 +49,8 @@
         }
 .head-bg {
     background: #2E7D32;
-    width: 35vw;
-    height: 8vh;
+    width: 45vw;
+    height: 19vh;
     border-radius: 1.5vw;
     position: absolute;
     top: 0;

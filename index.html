@@ -50,8 +50,8 @@
         }
 .head-bg {
     background: #2E7D32;
-    width: 35vw;
-    height: 8vh;
+    width: 500px;          /* 500px ≈ 35% of a 1440px screen */
+    height: 110px;          /* 110px ≈ 8% of a 1366px screen height */
     border-radius: 1.5vw;
     position: absolute;
     top: 0;
@@ -524,6 +524,14 @@
             box-shadow: none;
             -webkit-tap-highlight-color: transparent;
         }
+        
+        @media (max-width: 768px) {
+    .cat, .wow, .ribbon, .green, .cat-coke, .heart-coke, .frog,
+    .cats, .hands, .till, .vinyl, .saranggola, .sticker,
+    .sims, .cam, .elle, .kiss, .mitsukipin, .heart {
+        display: none;
+    }
+}
     </style>
 </head>
 <body>
